@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>高频词汇库 · Ethan英语</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="manifest" href="manifest.json">
+  <link rel="icon" type="image/png" sizes="192x192" href="icon-192.png">
+  <link rel="apple-touch-icon" href="apple-touch-icon.png">
+  <meta name="theme-color" content="#2563eb">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="Ethan">
+</head>
+<body>
+
+  <nav class="nav">
+    <div class="nav-inner">
+      <a class="logo" href="index.html"><span class="mark">E</span><span>Ethan<b>英语</b></span></a>
+      <button class="nav-toggle" aria-label="菜单">☰</button>
+      <ul class="nav-links">
+        <li><a href="index.html">首页</a></li>
+        <li><a href="fanwen.html">范文库</a></li>
+        <li><a href="cihui.html">词汇库</a></li>
+        <li><a href="jiqiao.html">写作技巧</a></li>
+        <li><a href="pigai.html">作文批改</a></li>
+        <li><a href="ziyuan.html">资源下载</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <div class="container">
+    <div class="crumb"><a href="index.html">首页</a> / 高频词汇库</div>
+  </div>
+
+  <section class="section" style="padding-top:24px">
+    <div class="container">
+      <div class="section-head">
+        <h2>高频词汇库</h2>
+        <p>七大主题分类词库，覆盖考研英语作文高频主题词。点击 ☆ 收藏到生词本，自动保存在本地浏览器。</p>
+      </div>
+
+      <div class="search-box" style="margin-bottom:20px">
+        <span class="s-icon">🔍</span>
+        <input type="text" id="vocab-search" placeholder="搜索英文或中文，如 culture / 文化 / innovation">
+      </div>
+
+      <div class="filter-group" id="vocab-filters"></div>
+
+      <div style="margin-bottom:12px;color:var(--text-muted);font-size:13px">共 <b id="vocab-count" style="color:var(--primary)">0</b> 个词条 · 收藏的词用 ★ 标记</div>
+
+      <div class="grid grid-2" id="vocab-list"></div>
+
+      <div class="tip">💡 生词本数据存储在你本地浏览器（localStorage），不会上传到服务器，隐私有保障。清除浏览器缓存会清空生词本，请知悉。</div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="container">
+      <div>
+        <div class="brand">Ethan英语</div>
+        <p>简约的考研英语作文学习平台。</p>
+      </div>
+      <div>
+        <h4>学习内容</h4>
+        <a href="fanwen.html">范文库</a>
+        <a href="cihui.html">高频词汇库</a>
+        <a href="jiqiao.html">写作技巧库</a>
+      </div>
+      <div>
+        <h4>备考资源</h4>
+        <a href="fanwen.html#zhenti">历年真题库</a>
+        <a href="ziyuan.html">资源下载</a>
+      </div>
+      <div class="copyright">本网站为学习演示项目 · 内容整理自公开备考资料，仅供个人学习使用</div>
+    </div>
+  </footer>
+
+  <script src="js/data.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>

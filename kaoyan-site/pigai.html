@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>作文批改 · Ethan英语</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="manifest" href="manifest.json">
+  <link rel="icon" type="image/png" sizes="192x192" href="icon-192.png">
+  <link rel="apple-touch-icon" href="apple-touch-icon.png">
+  <meta name="theme-color" content="#2563eb">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="Ethan">
+</head>
+<body>
+
+  <nav class="nav">
+    <div class="nav-inner">
+      <a class="logo" href="index.html"><span class="mark">E</span><span>Ethan<b>英语</b></span></a>
+      <button class="nav-toggle" aria-label="菜单">☰</button>
+      <ul class="nav-links">
+        <li><a href="index.html">首页</a></li>
+        <li><a href="fanwen.html">范文库</a></li>
+        <li><a href="cihui.html">词汇库</a></li>
+        <li><a href="jiqiao.html">写作技巧</a></li>
+        <li><a href="pigai.html">作文批改</a></li>
+        <li><a href="ziyuan.html">资源下载</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <div class="container">
+    <div class="crumb"><a href="index.html">首页</a> / 作文批改</div>
+  </div>
+
+  <section class="section" style="padding-top:24px">
+    <div class="container">
+      <div class="section-head">
+        <h2>作文批改练习</h2>
+        <p>在线写作，点击批改即可获得字数、句型、衔接、俗套句等即时反馈与模拟评分。</p>
+      </div>
+
+      <div style="margin-bottom:18px">
+        <button class="chip" data-sample="As is symbolically depicted in the figure above, a group of young people are working together to climb a steep mountain. The primary intention of the drawing seems to remind the whole society that cooperation is so indispensable that we can hardly imagine our life without it.
+
+There exist plenty of causes accounting for my opinions in various aspects. For instance, my roommate, Kevin, is passionate about teamwork, which brings him remarkable progress. Not only does cooperation improve our efficiency, but it also enables us to overcome difficulties.
+
+It is not difficult to draw the conclusion that enough attention must be turned to cooperation. It is imperative for the authorities to allocate more funds to promote it. Only through the joint efforts of all people can we effectively solve the problem and embrace a brighter future.">填入优质示例</button>
+        <button class="chip" data-sample="As is shown above, many students are reading books. There are many reasons for this. It is very important for us to study hard. More and more people think reading is good. Every coin has two sides. In a word, we should read more books. Only in this way can we be successful.">填入反面示例</button>
+      </div>
+
+      <div class="practice-area">
+        <div class="panel">
+          <h3>✍️ 你的作文</h3>
+          <textarea id="essay-input" placeholder="在此输入或粘贴你的英文作文……&#10;&#10;建议字数：英一大作文 160-200 词，英二约 150 词，小作文约 100 词"></textarea>
+          <div class="word-count" id="word-count">已输入 0 词</div>
+
+          <div id="ai-config-panel" style="display:none;margin-top:14px;background:#f8fafc;border:1px solid var(--border);border-radius:10px;padding:16px">
+            <p style="font-weight:700;margin-bottom:10px">⚙️ AI 批改配置（Key 仅保存在本地浏览器）</p>
+            <label style="font-size:13px;color:var(--text-secondary);display:block;margin-bottom:4px">服务商</label>
+            <select id="ai-provider" style="width:100%;padding:9px 12px;border:1px solid var(--border);border-radius:8px;margin-bottom:10px;font-size:14px;background:#fff">
+              <option value="deepseek">DeepSeek（推荐）</option>
+              <option value="openai">OpenAI</option>
+              <option value="custom">自定义（其他 OpenAI 兼容接口）</option>
+            </select>
+            <label style="font-size:13px;color:var(--text-secondary);display:block;margin-bottom:4px">API Key</label>
+            <input type="password" id="ai-key" placeholder="sk-..." style="width:100%;padding:9px 12px;border:1px solid var(--border);border-radius:8px;margin-bottom:10px;font-size:14px;background:#fff">
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
+              <div>
+                <label style="font-size:13px;color:var(--text-secondary);display:block;margin-bottom:4px">模型名</label>
+                <input type="text" id="ai-model" placeholder="deepseek-chat" style="width:100%;padding:9px 12px;border:1px solid var(--border);border-radius:8px;font-size:14px;background:#fff">
+              </div>
+              <div>
+                <label style="font-size:13px;color:var(--text-secondary);display:block;margin-bottom:4px">接口地址 Base URL</label>
+                <input type="text" id="ai-base" placeholder="https://api.deepseek.com" style="width:100%;padding:9px 12px;border:1px solid var(--border);border-radius:8px;font-size:14px;background:#fff">
+              </div>
+            </div>
+            <button class="btn btn-outline" id="ai-save-btn" style="margin-top:12px">保存配置</button>
+            <p style="font-size:12px;color:var(--text-muted);margin-top:10px">⚠️ Key 保存在本地浏览器 localStorage，仅供个人自用。若担心泄露，请使用附带的 server.js 后端代理，并将 Base URL 填为 http://localhost:3000。</p>
+          </div>
+
+          <div style="margin-top:14px;display:flex;gap:10px;flex-wrap:wrap;align-items:center">
+            <button class="btn btn-primary" id="grade-btn">🔍 本地批改</button>
+            <button class="btn btn-outline" id="ai-grade-btn">🤖 AI 精批</button>
+            <button class="chip" id="ai-config-toggle" type="button">⚙️ AI 配置</button>
+          </div>
+        </div>
+
+        <div class="panel">
+          <h3>📊 批改报告</h3>
+          <div id="grade-result">
+            <p style="color:var(--text-muted);font-size:14px">批改结果将显示在这里。输入作文后点击"开始批改"。</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="tip">💡 <b>两种批改模式：</b>①「本地批改」无需联网，即时检查字数、句型、衔接、俗套句；②「AI 精批」需在"AI 配置"填入 API Key，调用大模型做语义级批改、句子润色与逐句点评。</div>
+    </div>
+  </section>
+
+  <!-- 我的学习数据 -->
+  <section class="section" style="padding-top:0">
+    <div class="container">
+      <div class="section-head">
+        <h2>我的学习数据</h2>
+        <p>批改历史、打卡与勋章，数据保存在本地浏览器，不上传服务器。</p>
+      </div>
+      <div class="stats-row" id="stats-box"></div>
+      <h3 style="margin:30px 0 14px;font-size:18px">🏆 我的勋章</h3>
+      <div class="badges-grid" id="badges-box"></div>
+      <h3 style="margin:30px 0 14px;font-size:18px">📋 批改历史</h3>
+      <div id="history-list"></div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="container">
+      <div>
+        <div class="brand">Ethan英语</div>
+        <p>简约的考研英语作文学习平台。</p>
+      </div>
+      <div>
+        <h4>学习内容</h4>
+        <a href="fanwen.html">范文库</a>
+        <a href="cihui.html">高频词汇库</a>
+        <a href="jiqiao.html">写作技巧库</a>
+      </div>
+      <div>
+        <h4>备考资源</h4>
+        <a href="fanwen.html#zhenti">历年真题库</a>
+        <a href="ziyuan.html">资源下载</a>
+      </div>
+      <div class="copyright">本网站为学习演示项目 · 内容整理自公开备考资料，仅供个人学习使用</div>
+    </div>
+  </footer>
+
+  <script src="js/data.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>
