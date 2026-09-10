@@ -9,9 +9,13 @@ if ("serviceWorker" in navigator) {
 document.addEventListener("DOMContentLoaded", function () {
   initNav();
   initFanwen();   // 先渲染动态内容（范文库手风琴）
-  initZhentiFanwen(); // 渲染真题范文解析
+  initZhentiFanwen(); // 渲染大作文真题范文解析
+  initXiaoZuoFanwen(); // 渲染小作文真题范文
   initAccordion(); // 再绑定所有手风琴事件（含动态渲染的）
   initVocab();
+  initJuxing();   // 功能句库
+  initFlash();    // 背诵闪卡
+  initTimer();    // 考场计时器
   initPractice();
   initAiGrade(); // AI 批改
   initZhenti();
@@ -52,10 +56,12 @@ function initVocab() {
   const search = document.getElementById("vocab-search");
   const filterWrap = document.getElementById("vocab-filters");
   const count = document.getElementById("vocab-count");
+  const ALL_VOCAB = [...VOCAB, ...(typeof VOCAB_EXTRA !== "undefined" ? VOCAB_EXTRA : [])];
+  const cats = ["全部", ...Array.from(new Set(ALL_VOCAB.map((v) => v.cat)))];
   let activeCat = "全部";
 
   // 渲染筛选标签
-  VOCAB_CATS.forEach((cat) => {
+  cats.forEach((cat) => {
     const chip = document.createElement("button");
     chip.className = "chip" + (cat === "全部" ? " active" : "");
     chip.textContent = cat;
@@ -72,7 +78,7 @@ function initVocab() {
 
   function render() {
     const kw = (search.value || "").trim().toLowerCase();
-    const items = VOCAB.filter((v) => {
+    const items = ALL_VOCAB.filter((v) => {
       const matchCat = activeCat === "全部" || v.cat === activeCat;
       const matchKw = !kw || v.en.toLowerCase().includes(kw) || v.zh.includes(kw);
       return matchCat && matchKw;
@@ -258,11 +264,17 @@ function initFanwen() {
     </div>`).join("");
 }
 
-/* ---- 真题范文解析渲染 ---- */
+/* ---- 大作文真题范文解析渲染 ---- */
 function initZhentiFanwen() {
   const list = document.getElementById("zhenti-fanwen-list");
   if (!list) return;
-  list.innerHTML = ZHENTI_FANWEN.map((f) => `
+  const extra1 = typeof FANWEN_YING1_EXTRA !== "undefined" ? FANWEN_YING1_EXTRA : [];
+  const extra2 = typeof FANWEN_YING2_EXTRA !== "undefined" ? FANWEN_YING2_EXTRA : [];
+  const extra26 = typeof FANWEN_2026 !== "undefined" ? FANWEN_2026 : [];
+  const all = [...ZHENTI_FANWEN, ...extra1, ...extra2, ...extra26];
+  // 英语一在前、英语二在后，组内按年份倒序
+  all.sort((a, b) => (a.exam === b.exam ? b.year - a.year : a.exam === "英语一" ? -1 : 1));
+  list.innerHTML = all.map((f) => `
     <div class="acc-item">
       <button class="acc-head">
         <span>${f.year} ${f.exam} · ${f.topic} <span class="badge badge-blue" style="margin-left:6px">${f.type}</span></span>
@@ -281,6 +293,92 @@ function initZhentiFanwen() {
         </ul>
       </div>
     </div>`).join("");
+}
+
+/* ---- 小作文真题范文渲染 ---- */
+function initXiaoZuoFanwen() {
+  const list = document.getElementById("xiaozuowen-fanwen-list");
+  if (!list) return;
+  const base = typeof XIAOZUOWEN_FANWEN !== "undefined" ? XIAOZUOWEN_FANWEN : [];
+  const y26 = typeof XIAOZUOWEN_2026 !== "undefined" ? XIAOZUOWEN_2026 : [];
+  const data = [...base, ...y26];
+  data.sort((a, b) => (a.exam === b.exam ? b.year - a.year : a.exam === "英语一" ? -1 : 1));
+  list.innerHTML = data.map((f) => `
+    <div class="acc-item">
+      <button class="acc-head">
+        <span>${f.year} ${f.exam} · ${f.topic} <span class="badge badge-amber" style="margin-left:6px">${f.type}</span></span>
+        <span class="arrow">▾</span>
+      </button>
+      <div class="acc-body">
+        <p style="margin-bottom:12px"><b>📋 题目要求：</b>${f.yaoqiu}</p>
+        <div style="margin-bottom:12px">${f.keywords.map((k) => `<span class="badge badge-green" style="margin-right:6px">${k}</span>`).join("")}</div>
+        <p style="margin-bottom:6px;font-weight:700">📄 范文</p>
+        <pre style="white-space:pre-wrap;background:#f8fafc;padding:16px;border-radius:10px;font-size:14px;font-family:inherit;line-height:1.9">${f.fanwen}</pre>
+        <p style="margin:16px 0 6px;font-weight:700">🔍 结构拆解</p>
+        <p style="color:var(--text-secondary)">${f.jiexi}</p>
+        <p style="margin:16px 0 6px;font-weight:700">✨ 亮点句型</p>
+        <ul style="padding-left:20px;color:var(--text-secondary)">
+          ${f.liangdian.map((l) => `<li>${l}</li>`).join("")}
+        </ul>
+      </div>
+    </div>`).join("");
+}
+
+/* ---- 功能句库渲染 ---- */
+function initJuxing() {
+  const list = document.getElementById("juxing-list");
+  if (!list) return;
+  const search = document.getElementById("juxing-search");
+  const filterWrap = document.getElementById("juxing-filters");
+  const count = document.getElementById("juxing-count");
+  let activeCat = "全部";
+
+  JUXING_CATS.forEach((cat) => {
+    const chip = document.createElement("button");
+    chip.className = "chip" + (cat === "全部" ? " active" : "");
+    chip.textContent = cat;
+    chip.addEventListener("click", () => {
+      filterWrap.querySelectorAll(".chip").forEach((c) => c.classList.remove("active"));
+      chip.classList.add("active");
+      activeCat = cat;
+      render();
+    });
+    filterWrap.appendChild(chip);
+  });
+
+  if (search) search.addEventListener("input", render);
+
+  function render() {
+    const kw = (search.value || "").trim().toLowerCase();
+    let total = 0;
+    let html = "";
+    JUXING.forEach((group) => {
+      if (activeCat !== "全部" && group.cat !== activeCat) return;
+      const items = group.items.filter((it) => !kw || it.en.toLowerCase().includes(kw) || it.zh.includes(kw));
+      if (!items.length) return;
+      total += items.length;
+      html += `<h3 class="juxing-cat">${group.cat}</h3><p class="juxing-desc">${group.desc}</p>`;
+      items.forEach((it) => {
+        html += `<div class="juxing-item">
+          <div class="j-en">${it.en}</div>
+          <div class="j-zh">${it.zh}</div>
+          <button class="j-copy" data-en="${it.en.replace(/"/g, "&quot;")}">复制</button>
+        </div>`;
+      });
+    });
+    list.innerHTML = html || '<p style="color:var(--text-muted);font-size:14px">没有匹配的句式。</p>';
+    if (count) count.textContent = total;
+    list.querySelectorAll(".j-copy").forEach((btn) => {
+      btn.addEventListener("click", () => {
+        const text = btn.dataset.en;
+        if (navigator.clipboard) navigator.clipboard.writeText(text).catch(() => {});
+        const orig = btn.textContent;
+        btn.textContent = "已复制";
+        setTimeout(() => (btn.textContent = orig), 1200);
+      });
+    });
+  }
+  render();
 }
 
 /* ============ 批改历史 ============ */
@@ -502,4 +600,113 @@ function formatAiResult(text) {
   const escaped = text.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
   const withBreaks = escaped.replace(/\n/g, "<br>");
   return withBreaks.replace(/【([^】]+)】/g, '<strong style="color:var(--primary)">【$1】</strong>');
+}
+
+/* ============ 背诵闪卡（功能句 / 范文随机抽背） ============ */
+function initFlash() {
+  const card = document.getElementById("flash-card");
+  if (!card) return;
+  const modeSel = document.getElementById("flash-mode");
+  const counter = document.getElementById("flash-counter");
+  const tagEl = document.getElementById("flash-tag");
+  const frontEl = document.getElementById("flash-front");
+  const backEl = document.getElementById("flash-back");
+
+  function buildDeck() {
+    const deck = [];
+    if (modeSel && modeSel.value === "juxing") {
+      (typeof JUXING !== "undefined" ? JUXING : []).forEach((g) =>
+        g.items.forEach((it) => deck.push({ tag: g.cat, front: it.zh, back: it.en }))
+      );
+    } else if (modeSel && modeSel.value === "word") {
+      const all = [...(typeof VOCAB !== "undefined" ? VOCAB : []), ...(typeof VOCAB_EXTRA !== "undefined" ? VOCAB_EXTRA : [])];
+      all.forEach((v) => deck.push({ tag: v.cat, front: v.zh, back: v.en }));
+    } else {
+      const big = [
+        ...(typeof ZHENTI_FANWEN !== "undefined" ? ZHENTI_FANWEN : []),
+        ...(typeof FANWEN_YING1_EXTRA !== "undefined" ? FANWEN_YING1_EXTRA : []),
+        ...(typeof FANWEN_YING2_EXTRA !== "undefined" ? FANWEN_YING2_EXTRA : []),
+        ...(typeof FANWEN_2026 !== "undefined" ? FANWEN_2026 : []),
+      ];
+      const small = [
+        ...(typeof XIAOZUOWEN_FANWEN !== "undefined" ? XIAOZUOWEN_FANWEN : []),
+        ...(typeof XIAOZUOWEN_2026 !== "undefined" ? XIAOZUOWEN_2026 : []),
+      ];
+      [...big, ...small].forEach((f) =>
+        deck.push({ tag: f.year + " " + f.exam + " · " + f.type, front: f.year + " " + f.exam + "｜" + f.topic, back: f.fanwen })
+      );
+    }
+    return deck;
+  }
+
+  let deck = buildDeck();
+  let idx = 0;
+  let flipped = false;
+
+  function show() {
+    if (!deck.length) { frontEl.textContent = "暂无卡片"; return; }
+    const c = deck[idx];
+    tagEl.textContent = c.tag;
+    frontEl.textContent = c.front;
+    backEl.textContent = c.back;
+    frontEl.style.display = flipped ? "none" : "block";
+    backEl.style.display = flipped ? "block" : "none";
+    counter.textContent = idx + 1 + " / " + deck.length;
+  }
+  function go(delta) { idx = (idx + delta + deck.length) % deck.length; flipped = false; show(); }
+  function randomCard() { idx = Math.floor(Math.random() * deck.length); flipped = false; show(); }
+
+  const bRandom = document.getElementById("flash-random");
+  const bPrev = document.getElementById("flash-prev");
+  const bNext = document.getElementById("flash-next");
+  if (bRandom) bRandom.addEventListener("click", randomCard);
+  if (bPrev) bPrev.addEventListener("click", () => go(-1));
+  if (bNext) bNext.addEventListener("click", () => go(1));
+  card.addEventListener("click", () => { flipped = !flipped; show(); });
+  if (modeSel) modeSel.addEventListener("change", () => { deck = buildDeck(); idx = 0; flipped = false; show(); });
+  show();
+}
+
+/* ============ 考场计时器 ============ */
+function initTimer() {
+  const disp = document.getElementById("timer-display");
+  if (!disp) return;
+  const startBtn = document.getElementById("timer-start");
+  const resetBtn = document.getElementById("timer-reset");
+  const presets = document.querySelectorAll("[data-min]");
+  let total = 25 * 60;
+  let remain = total;
+  let timer = null;
+  let running = false;
+
+  function fmt(s) {
+    const m = Math.floor(s / 60);
+    const ss = s % 60;
+    return String(m).padStart(2, "0") + ":" + String(ss).padStart(2, "0");
+  }
+  function render() {
+    disp.textContent = fmt(remain);
+    if (remain <= 60) disp.classList.add("low"); else disp.classList.remove("low");
+  }
+  function stop() { clearInterval(timer); running = false; if (startBtn) startBtn.textContent = "▶ 开始"; }
+  function tick() {
+    remain--;
+    if (remain <= 0) { remain = 0; render(); stop(); alert("⏰ 时间到！"); return; }
+    render();
+  }
+  if (startBtn) startBtn.addEventListener("click", () => {
+    if (running) { stop(); return; }
+    running = true; startBtn.textContent = "⏸ 暂停";
+    timer = setInterval(tick, 1000);
+  });
+  if (resetBtn) resetBtn.addEventListener("click", () => { stop(); remain = total; render(); });
+  presets.forEach((p) => p.addEventListener("click", () => {
+    stop();
+    total = parseInt(p.dataset.min, 10) * 60;
+    remain = total;
+    render();
+    presets.forEach((x) => x.classList.remove("active"));
+    p.classList.add("active");
+  }));
+  render();
 }

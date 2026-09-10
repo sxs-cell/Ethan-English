@@ -192,6 +192,7 @@ const ZHENTI_YING1 = [
   { year: 2023, type: "图画", topic: "赛龙舟（文化自信）" },
   { year: 2024, type: "图画+图表", topic: "公园建设（公共设施）" },
   { year: 2025, type: "图表·表格", topic: "耐用消费品拥有量" },
+  { year: 2026, type: "图表·双饼图", topic: "养老机器人接受度调查" },
 ];
 
 const ZHENTI_YING2 = [
@@ -211,6 +212,7 @@ const ZHENTI_YING2 = [
   { year: 2023, type: "线状图", topic: "居民健康素养水平" },
   { year: 2024, type: "柱状图", topic: "活动效果百分比" },
   { year: 2025, type: "柱状图", topic: "社区老人日常休闲活动" },
+  { year: 2026, type: "柱状图", topic: "儿童户外活动益处" },
 ];
 
 /* ---- 万能句库（写作技巧页引用） ---- */

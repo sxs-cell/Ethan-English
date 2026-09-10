@@ -3,7 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>高频词汇库 · Ethan英语</title>
+  <title>背诵闪卡 · Ethan英语</title>
+  <meta name="description" content="考研英语背诵闪卡：功能句、范文、词汇随机抽背，看中文想英文，高效记忆。">
   <link rel="stylesheet" href="css/style.css">
   <link rel="manifest" href="manifest.json">
   <link rel="icon" type="image/png" sizes="192x192" href="icon-192.png">
@@ -34,28 +35,41 @@
   </nav>
 
   <div class="container">
-    <div class="crumb"><a href="index.html">首页</a> / 高频词汇库</div>
+    <div class="crumb"><a href="index.html">首页</a> / 背诵闪卡</div>
   </div>
 
   <section class="section" style="padding-top:24px">
     <div class="container">
       <div class="section-head">
-        <h2>高频词汇库</h2>
-        <p>七大主题分类词库，覆盖考研英语作文高频主题词。点击 ☆ 收藏到生词本，自动保存在本地浏览器。</p>
+        <h2>背诵闪卡</h2>
+        <p>看中文想英文，点击卡片翻面验证。支持功能句、范文、词汇三种模式随机抽背。</p>
       </div>
 
-      <div class="search-box" style="margin-bottom:20px">
-        <span class="s-icon">🔍</span>
-        <input type="text" id="vocab-search" placeholder="搜索英文或中文，如 culture / 文化 / innovation">
+      <div class="flash-wrap">
+        <div class="flash-toolbar">
+          <select id="flash-mode" class="flash-select">
+            <option value="juxing">功能句</option>
+            <option value="fanwen">范文</option>
+            <option value="word">词汇</option>
+          </select>
+          <span id="flash-counter" class="flash-counter">0 / 0</span>
+        </div>
+
+        <div class="flash-card" id="flash-card">
+          <div class="flash-tag" id="flash-tag"></div>
+          <div class="flash-front" id="flash-front"></div>
+          <div class="flash-back" id="flash-back"></div>
+          <div class="flash-hint">👆 点击卡片翻面</div>
+        </div>
+
+        <div class="flash-btns">
+          <button class="btn btn-outline" id="flash-prev">← 上一张</button>
+          <button class="btn btn-primary" id="flash-random">🎲 随机一张</button>
+          <button class="btn btn-outline" id="flash-next">下一张 →</button>
+        </div>
       </div>
 
-      <div class="filter-group" id="vocab-filters"></div>
-
-      <div style="margin-bottom:12px;color:var(--text-muted);font-size:13px">共 <b id="vocab-count" style="color:var(--primary)">0</b> 个词条 · 收藏的词用 ★ 标记</div>
-
-      <div class="grid grid-2" id="vocab-list"></div>
-
-      <div class="tip">💡 生词本数据存储在你本地浏览器（localStorage），不会上传到服务器，隐私有保障。清除浏览器缓存会清空生词本，请知悉。</div>
+      <div class="tip">💡 用法：先看中文（或题目）在脑中回忆英文，再点卡片翻面核对。功能句模式练"组句"，范文模式练"整篇思路"，词汇模式练"熟词"。建议每天早晚各一轮。</div>
     </div>
   </section>
 
@@ -82,6 +96,12 @@
   </footer>
 
   <script src="js/data.js"></script>
+  <script src="js/juxing-data.js"></script>
+  <script src="js/extra-ying1.js"></script>
+  <script src="js/extra-ying2.js"></script>
+  <script src="js/extra-xiaozuowen.js"></script>
+  <script src="js/extra-2026.js"></script>
+  <script src="js/vocab-extra.js"></script>
   <script src="js/main.js"></script>
 </body>
 </html>

@@ -3,7 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>高频词汇库 · Ethan英语</title>
+  <title>功能句库 · Ethan英语</title>
+  <meta name="description" content="考研英语作文功能句库：按现象引入、原因分析、举例、对比、建议、总结、数据描述等功能分类，考场自由组装。">
   <link rel="stylesheet" href="css/style.css">
   <link rel="manifest" href="manifest.json">
   <link rel="icon" type="image/png" sizes="192x192" href="icon-192.png">
@@ -34,28 +35,28 @@
   </nav>
 
   <div class="container">
-    <div class="crumb"><a href="index.html">首页</a> / 高频词汇库</div>
+    <div class="crumb"><a href="index.html">首页</a> / 功能句库</div>
   </div>
 
   <section class="section" style="padding-top:24px">
     <div class="container">
       <div class="section-head">
-        <h2>高频词汇库</h2>
-        <p>七大主题分类词库，覆盖考研英语作文高频主题词。点击 ☆ 收藏到生词本，自动保存在本地浏览器。</p>
+        <h2>功能句库</h2>
+        <p>按功能分类的"可组装句式"。面对 2027 写作"去模板化"，不背整篇模板，考场按题目现场组装。点击「复制」即可取用。</p>
       </div>
 
       <div class="search-box" style="margin-bottom:20px">
         <span class="s-icon">🔍</span>
-        <input type="text" id="vocab-search" placeholder="搜索英文或中文，如 culture / 文化 / innovation">
+        <input type="text" id="juxing-search" placeholder="搜索句式或中文，如 not only / 原因 / 占比">
       </div>
 
-      <div class="filter-group" id="vocab-filters"></div>
+      <div class="filter-group" id="juxing-filters"></div>
 
-      <div style="margin-bottom:12px;color:var(--text-muted);font-size:13px">共 <b id="vocab-count" style="color:var(--primary)">0</b> 个词条 · 收藏的词用 ★ 标记</div>
+      <div style="margin-bottom:12px;color:var(--text-muted);font-size:13px">共 <b id="juxing-count" style="color:var(--primary)">0</b> 个句式</div>
 
-      <div class="grid grid-2" id="vocab-list"></div>
+      <div id="juxing-list"></div>
 
-      <div class="tip">💡 生词本数据存储在你本地浏览器（localStorage），不会上传到服务器，隐私有保障。清除浏览器缓存会清空生词本，请知悉。</div>
+      <div class="tip">💡 用法：第一段取「现象引入 + 主题阐述」，第二段取「原因分析 / 举例 / 对比 / 让步」，第三段取「建议措施 + 总结呼吁」；图表作文再叠加「数据描述」。按题目挑句子组装，避免整篇模板被判雷同。</div>
     </div>
   </section>
 
@@ -81,7 +82,7 @@
     </div>
   </footer>
 
-  <script src="js/data.js"></script>
+  <script src="js/juxing-data.js"></script>
   <script src="js/main.js"></script>
 </body>
 </html>

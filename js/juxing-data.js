@@ -1,0 +1,131 @@
+/* ============ 功能句库（按功能分类，考场自由组装） ============ */
+/* 应对 2027 写作"去模板化"：不背整篇，改背功能句 + 逻辑框架 */
+
+const JUXING = [
+  {
+    cat: "现象引入（开头）",
+    desc: "第一段引入话题：图画/图表描述、点明现象",
+    items: [
+      { en: "As is symbolically depicted in the figure above, ...", zh: "如上图所示（象征性描绘）……" },
+      { en: "According to the figures given in the chart above, ...", zh: "根据上图数据……" },
+      { en: "Recent years have witnessed a growing trend of ...", zh: "近年来……呈上升趋势。" },
+      { en: "With the rapid development of society and economy, ...", zh: "随着社会与经济的快速发展……" },
+      { en: "Nowadays, ... has become an increasingly common phenomenon.", zh: "如今，……已成为越来越普遍的现象。" },
+      { en: "It is not uncommon to see ... in our daily life.", zh: "在日常生活中，……并不罕见。" },
+      { en: "There has been a heated discussion about ...", zh: "关于……引发了热烈讨论。" },
+      { en: "What the drawing conveys is far-reaching and thought-provoking.", zh: "这幅图所传达的寓意深远而发人深省。" },
+      { en: "It is widely acknowledged that ...", zh: "……被广泛认可。" },
+      { en: "The above chart clearly illustrates the changes in ...", zh: "上图清晰地展示了……的变化。" },
+    ],
+  },
+  {
+    cat: "主题阐述（点题）",
+    desc: "点明中心思想或现象本质",
+    items: [
+      { en: "The primary intention of the drawing seems to remind us that ...", zh: "这幅图的主要意图似乎在于提醒我们……" },
+      { en: "... is so indispensable that we can hardly imagine our life without it.", zh: "……如此不可或缺，以至于我们难以想象没有它的生活。" },
+      { en: "It is ... that must deserve our greater attention.", zh: "正是……值得我们更多的关注。" },
+      { en: "The phenomenon reflects the fact that ...", zh: "这一现象反映了……的事实。" },
+      { en: "What lies behind the phenomenon is worth pondering.", zh: "现象背后的问题值得深思。" },
+      { en: "The significance of ... can hardly be overestimated.", zh: "……的重要性怎么估计都不为过。" },
+      { en: "This is not an uncommon scene in our society.", zh: "这在我们社会中并非罕见景象。" },
+      { en: "... has been developing rapidly in recent years.", zh: "近年来……发展迅速。" },
+    ],
+  },
+  {
+    cat: "原因分析（主体·论证）",
+    desc: "第二段分析原因（英一约3点，英二2–3点）",
+    items: [
+      { en: "There exist plenty of causes accounting for my opinions in various aspects.", zh: "众多原因从各个方面解释了此观点。" },
+      { en: "The reasons behind are manifold.", zh: "其背后的原因是多方面的。" },
+      { en: "First and foremost, ...", zh: "首先，也是最重要的一点……" },
+      { en: "The primary reason is that ...", zh: "主要原因是……" },
+      { en: "Owing to ..., ...", zh: "由于……，……" },
+      { en: "This phenomenon can be attributed to ...", zh: "这一现象可归因于……" },
+      { en: "It is well known that ..., which ...", zh: "众所周知……，这……" },
+      { en: "Not only does ... , but it also ...", zh: "不仅……，而且……" },
+      { en: "A variety of factors may contribute to this tendency.", zh: "多种因素可能导致这一趋势。" },
+      { en: "It partly results from ..., and partly from ...", zh: "这既部分源于……，也部分源于……" },
+    ],
+  },
+  {
+    cat: "举例论证",
+    desc: "用具体例子支撑观点",
+    items: [
+      { en: "A case in point is that ...", zh: "一个恰当的例子是……" },
+      { en: "Take ... as an example, ...", zh: "以……为例……" },
+      { en: "For instance, my roommate, Kevin, is passionate about ..., which brings him ...", zh: "例如，我的室友凯文热衷于……这给他带来了……" },
+      { en: "Such examples are by no means rare in our daily life.", zh: "这样的例子在日常生活中绝非罕见。" },
+      { en: "This can be best illustrated by the following example.", zh: "这一点可由下面这个例子充分说明。" },
+      { en: "Numerous cases can be found to support this view.", zh: "可找到众多案例支持这一观点。" },
+    ],
+  },
+  {
+    cat: "对比论证",
+    desc: "正反、今昔、A/B 对比",
+    items: [
+      { en: "Compared with B, A ...", zh: "与 B 相比，A……" },
+      { en: "While some people argue that ..., others believe that ...", zh: "有些人认为……，另一些人则认为……" },
+      { en: "On the one hand, ... ; on the other hand, ...", zh: "一方面……；另一方面……" },
+      { en: "In contrast to ..., ...", zh: "与……相反，……" },
+      { en: "Just as the saying goes, ...", zh: "正如谚语所说……" },
+      { en: "There is a striking contrast between ... and ...", zh: "……与……之间存在鲜明对比。" },
+    ],
+  },
+  {
+    cat: "让步转折",
+    desc: "增强论证严密性，避免绝对化",
+    items: [
+      { en: "Admittedly, ..., but ...", zh: "诚然……，但是……" },
+      { en: "It is true that ..., yet ...", zh: "确实……，然而……" },
+      { en: "Although ..., ...", zh: "尽管……，……" },
+      { en: "Despite the fact that ..., ...", zh: "尽管……，……" },
+      { en: "However, this is not to say that ...", zh: "然而，这并不意味着……" },
+      { en: "However, we should not go to extremes.", zh: "然而，我们不应走极端。" },
+    ],
+  },
+  {
+    cat: "建议措施",
+    desc: "第三段提出具体做法，分角度（政府/社会/个人/学校）",
+    items: [
+      { en: "It is imperative for sb. to do ...", zh: "某人有必要做……" },
+      { en: "We should spare no effort to ...", zh: "我们应不遗余力地……" },
+      { en: "The authorities ought to take effective measures to ...", zh: "有关部门应采取有效措施……" },
+      { en: "It is advisable for us to ...", zh: "我们宜……" },
+      { en: "Greater attention must be paid to ...", zh: "必须更加重视……" },
+      { en: "Only by doing so can we ...", zh: "唯有如此，我们才能……" },
+      { en: "Both individuals and society should make joint efforts.", zh: "个人与社会应共同努力。" },
+      { en: "It is high time that we took action to ...", zh: "是时候我们采取行动去……" },
+    ],
+  },
+  {
+    cat: "总结呼吁（结尾）",
+    desc: "第三段收束全文、畅想未来",
+    items: [
+      { en: "It is not difficult to draw the conclusion that ...", zh: "不难得出这样的结论……" },
+      { en: "In a word, ...", zh: "总之……" },
+      { en: "To sum up, ...", zh: "总而言之……" },
+      { en: "We should bear in mind that ...", zh: "我们应牢记……" },
+      { en: "Only through the joint efforts of all people can we ...", zh: "唯有通过全体人民的共同努力，我们才能……" },
+      { en: "There is no denying that ...", zh: "不可否认……" },
+      { en: "There is no better time for us to ... than now.", zh: "对我们而言，没有比现在更好的时机去……" },
+      { en: "Going forward, this trend is expected to continue.", zh: "展望未来，这一趋势预计将持续。" },
+    ],
+  },
+  {
+    cat: "数据描述（图表作文）",
+    desc: "描述图表数据、增减、占比、排名",
+    items: [
+      { en: "According to the figures in the chart, ...", zh: "根据图表数据……" },
+      { en: "The number of ... increased / decreased from A to B.", zh: "……的数量从 A 增减到 B。" },
+      { en: "The proportion of ... accounts for ...%.", zh: "……的比例占……%。" },
+      { en: "... ranks first, followed by ...", zh: "……位居第一，其次是……" },
+      { en: "... witnessed a sharp / slight rise / drop.", zh: "……急剧／略微上升／下降。" },
+      { en: "Compared with ..., the figure for ... rose by ...%.", zh: "与……相比，……上升了……%。" },
+      { en: "The figure reached a peak of ... in ...", zh: "该数字在……年达到……的峰值。" },
+      { en: "The data clearly show a steady upward trend.", zh: "数据清晰显示稳步上升的趋势。" },
+    ],
+  },
+];
+
+const JUXING_CATS = ["全部", ...JUXING.map((g) => g.cat)];

@@ -336,3 +336,64 @@ td .en { color: var(--primary-dark); font-weight: 600; }
   padding: 18px 20px; font-size: 14.5px; line-height: 1.9; color: var(--text);
 }
 .ai-result strong { color: var(--primary); }
+
+/* ============ 功能句库 ============ */
+.juxing-cat { font-size: 18px; font-weight: 700; margin: 26px 0 4px; color: var(--text); }
+.juxing-desc { font-size: 13px; color: var(--text-muted); margin-bottom: 12px; }
+.juxing-item {
+  position: relative; background: var(--surface); border: 1px solid var(--border);
+  border-radius: 10px; padding: 14px 72px 14px 16px; margin-bottom: 10px;
+}
+.juxing-item .j-en { font-size: 15px; font-weight: 600; color: var(--primary-dark); line-height: 1.6; }
+.juxing-item .j-zh { font-size: 13.5px; color: var(--text-secondary); margin-top: 3px; }
+.juxing-item .j-copy {
+  position: absolute; right: 14px; top: 50%; transform: translateY(-50%);
+  border: 1px solid var(--border); background: #fff; border-radius: 8px;
+  padding: 5px 12px; font-size: 13px; cursor: pointer; color: var(--text-secondary);
+}
+.juxing-item .j-copy:hover { border-color: var(--primary); color: var(--primary); }
+
+/* ============ 页面内快捷导航 ============ */
+.anchor-nav { position: sticky; top: 62px; z-index: 90; background: var(--bg); border-bottom: 1px solid var(--border); padding: 10px 0; }
+.anchor-nav .container { display: flex; gap: 10px; flex-wrap: wrap; }
+.anchor-nav a {
+  padding: 6px 14px; border-radius: 999px; background: #fff; border: 1px solid var(--border);
+  font-size: 13.5px; color: var(--text-secondary); font-weight: 500;
+}
+.anchor-nav a:hover { border-color: var(--primary); color: var(--primary); }
+
+/* ============ 背诵闪卡 ============ */
+.flash-wrap { max-width: 760px; margin: 0 auto; }
+.flash-toolbar { display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px; }
+.flash-select { padding: 8px 14px; border-radius: 10px; border: 1px solid var(--border); font-size: 14px; background: #fff; }
+.flash-counter { font-size: 14px; color: var(--text-muted); }
+.flash-card {
+  background: var(--surface); border: 1px solid var(--border); border-radius: 16px;
+  min-height: 300px; box-shadow: var(--shadow-md); cursor: pointer; padding: 28px;
+  display: flex; flex-direction: column; position: relative;
+}
+.flash-card .flash-tag {
+  font-size: 12px; color: var(--primary-dark); background: var(--primary-light);
+  padding: 3px 10px; border-radius: 999px; align-self: flex-start; margin-bottom: 18px;
+}
+.flash-front {
+  font-size: 22px; font-weight: 700; color: var(--text); line-height: 1.8;
+  flex: 1; display: flex; align-items: center; justify-content: center; text-align: center;
+}
+.flash-back {
+  font-size: 16px; color: var(--primary-dark); line-height: 1.9; white-space: pre-wrap;
+  flex: 1; overflow-y: auto; max-height: 440px; display: none;
+}
+.flash-hint { font-size: 12px; color: var(--text-muted); text-align: center; margin-top: 14px; }
+.flash-btns { display: flex; gap: 12px; justify-content: center; margin-top: 20px; flex-wrap: wrap; }
+
+/* ============ 考场计时器 ============ */
+.timer-bar {
+  display: flex; align-items: center; gap: 12px; flex-wrap: wrap;
+  background: var(--surface); border: 1px solid var(--border); border-radius: 12px;
+  padding: 12px 18px; margin-bottom: 20px;
+}
+.timer-label { font-weight: 700; font-size: 14px; }
+.timer-display { font-size: 30px; font-weight: 800; color: var(--primary); font-variant-numeric: tabular-nums; min-width: 110px; }
+.timer-display.low { color: var(--danger); }
+.timer-presets { display: flex; gap: 8px; flex-wrap: wrap; }

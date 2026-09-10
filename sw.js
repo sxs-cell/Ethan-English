@@ -3,7 +3,7 @@
  *  作用：预缓存核心资源，让网站可"添加到主屏幕"、断网也能打开
  * ============================================================ */
 
-const CACHE_NAME = "ethan-english-v1";
+const CACHE_NAME = "ethan-english-v3";
 
 // 核心资源：预缓存，保证离线可访问
 const CORE_ASSETS = [
@@ -11,11 +11,19 @@ const CORE_ASSETS = [
   "./index.html",
   "./fanwen.html",
   "./cihui.html",
+  "./juxing.html",
   "./jiqiao.html",
   "./pigai.html",
+  "./flash.html",
   "./ziyuan.html",
   "./css/style.css",
   "./js/data.js",
+  "./js/juxing-data.js",
+  "./js/extra-ying1.js",
+  "./js/extra-ying2.js",
+  "./js/extra-xiaozuowen.js",
+  "./js/extra-2026.js",
+  "./js/vocab-extra.js",
   "./js/main.js",
   "./manifest.json",
   "./icon-192.png",

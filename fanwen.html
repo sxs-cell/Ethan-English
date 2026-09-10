@@ -24,8 +24,10 @@
         <li><a href="index.html">首页</a></li>
         <li><a href="fanwen.html">范文库</a></li>
         <li><a href="cihui.html">词汇库</a></li>
+        <li><a href="juxing.html">功能句库</a></li>
         <li><a href="jiqiao.html">写作技巧</a></li>
         <li><a href="pigai.html">作文批改</a></li>
+        <li><a href="flash.html">背诵闪卡</a></li>
         <li><a href="ziyuan.html">资源下载</a></li>
       </ul>
     </div>
@@ -35,7 +37,17 @@
     <div class="crumb"><a href="index.html">首页</a> / 范文库</div>
   </div>
 
-  <section class="section" style="padding-top:24px">
+  <!-- 页面内快捷导航 -->
+  <div class="anchor-nav">
+    <div class="container">
+      <a href="#moban">① 模板示范</a>
+      <a href="#dazuowen">② 大作文真题范文解析</a>
+      <a href="#xiaozuowen">③ 小作文真题范文</a>
+      <a href="#zhenti">④ 历年大作文真题题目</a>
+    </div>
+  </div>
+
+  <section class="section" id="moban" style="padding-top:24px">
     <div class="container">
       <div class="section-head">
         <h2>范文库 · 模板示范</h2>
@@ -47,24 +59,35 @@
     </div>
   </section>
 
-  <!-- 真题范文解析 -->
-  <section class="section" style="padding-top:0">
+  <!-- 大作文真题范文解析 -->
+  <section class="section" id="dazuowen" style="padding-top:0">
     <div class="container">
       <div class="section-head">
-        <h2>真题范文解析</h2>
-        <p>精选历年真题，逐篇提供"审题立意 + 范文 + 结构拆解 + 亮点句型 + 主题词"。每周更新 2–3 篇，持续扩充。</p>
+        <h2>大作文真题范文解析</h2>
+        <p>覆盖英语一 / 英语二 2015–2026 真题，逐篇提供"审题立意 + 范文 + 结构拆解 + 亮点句型 + 主题词"。（2026 英语一改为图表作文，属新型变化）</p>
       </div>
       <div class="accordion" id="zhenti-fanwen-list"></div>
-      <div class="tip">💡 每篇范文都严格套用"三段式 + 万能句"模板，对照<a href="jiqiao.html">写作技巧库</a>的框架学习效果更佳。建议先看审题立意，再遮住范文自己写一遍，最后对比拆解。</div>
+      <div class="tip">💡 每篇范文严格套用"三段式 + 万能句"，对照<a href="jiqiao.html">写作技巧库</a>与<a href="juxing.html">功能句库</a>学习更佳。建议先看审题立意，遮住范文自己写一遍，再对比拆解。</div>
     </div>
   </section>
 
-  <!-- 真题库 -->
+  <!-- 小作文真题范文 -->
+  <section class="section" id="xiaozuowen" style="padding-top:0">
+    <div class="container">
+      <div class="section-head">
+        <h2>小作文真题范文</h2>
+        <p>英语一 / 英语二历年小作文真题范文，涵盖书信、通知、邮件等应用文类型。</p>
+      </div>
+      <div class="accordion" id="xiaozuowen-fanwen-list"></div>
+    </div>
+  </section>
+
+  <!-- 历年大作文真题题目 -->
   <section class="section" id="zhenti">
     <div class="container">
       <div class="section-head">
-        <h2>历年真题库</h2>
-        <p>英语一 2001–2025、英语二 2010–2025 大作文题目全收录。</p>
+        <h2>历年大作文真题题目</h2>
+        <p>英语一 2001–2026、英语二 2010–2026 大作文题目全收录。</p>
       </div>
       <div class="grid grid-2">
         <div>
@@ -99,11 +122,12 @@
         <h4>学习内容</h4>
         <a href="fanwen.html">范文库</a>
         <a href="cihui.html">高频词汇库</a>
+        <a href="juxing.html">功能句库</a>
         <a href="jiqiao.html">写作技巧库</a>
       </div>
       <div>
         <h4>备考资源</h4>
-        <a href="fanwen.html#zhenti">历年真题库</a>
+        <a href="fanwen.html#zhenti">历年大作文真题题目</a>
         <a href="ziyuan.html">资源下载</a>
       </div>
       <div class="copyright">本网站为学习演示项目 · 内容整理自公开备考资料，仅供个人学习使用</div>
@@ -111,6 +135,10 @@
   </footer>
 
   <script src="js/data.js"></script>
+  <script src="js/extra-ying1.js"></script>
+  <script src="js/extra-ying2.js"></script>
+  <script src="js/extra-xiaozuowen.js"></script>
+  <script src="js/extra-2026.js"></script>
   <script src="js/main.js"></script>
 </body>
 </html>
