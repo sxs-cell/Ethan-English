@@ -56,7 +56,7 @@ function initVocab() {
   const search = document.getElementById("vocab-search");
   const filterWrap = document.getElementById("vocab-filters");
   const count = document.getElementById("vocab-count");
-  const ALL_VOCAB = [...VOCAB, ...(typeof VOCAB_EXTRA !== "undefined" ? VOCAB_EXTRA : [])];
+  const ALL_VOCAB = [...VOCAB, ...(typeof VOCAB_EXTRA !== "undefined" ? VOCAB_EXTRA : []), ...(typeof VOCAB_READING !== "undefined" ? VOCAB_READING : [])];
   const cats = ["全部", ...Array.from(new Set(ALL_VOCAB.map((v) => v.cat)))];
   let activeCat = "全部";
 
@@ -611,6 +611,8 @@ function initFlash() {
   const tagEl = document.getElementById("flash-tag");
   const frontEl = document.getElementById("flash-front");
   const backEl = document.getElementById("flash-back");
+  const srcSel = document.getElementById("flash-src");
+  const catSel = document.getElementById("flash-cat");
 
   function buildDeck() {
     const deck = [];
@@ -621,6 +623,13 @@ function initFlash() {
     } else if (modeSel && modeSel.value === "word") {
       const all = [...(typeof VOCAB !== "undefined" ? VOCAB : []), ...(typeof VOCAB_EXTRA !== "undefined" ? VOCAB_EXTRA : [])];
       all.forEach((v) => deck.push({ tag: v.cat, front: v.zh, back: v.en }));
+    } else if (modeSel && modeSel.value === "reading") {
+      let list = typeof VOCAB_READING !== "undefined" ? VOCAB_READING : [];
+      const src = srcSel ? srcSel.value : "all";
+      if (src !== "all") list = list.filter((v) => v.src === src);
+      const cat = catSel ? catSel.value : "all";
+      if (cat !== "all") list = list.filter((v) => v.cat === cat);
+      list.forEach((v) => deck.push({ tag: (v.src || "") + " · " + v.cat, front: v.zh, back: v.en }));
     } else {
       const big = [
         ...(typeof ZHENTI_FANWEN !== "undefined" ? ZHENTI_FANWEN : []),
@@ -663,7 +672,15 @@ function initFlash() {
   if (bPrev) bPrev.addEventListener("click", () => go(-1));
   if (bNext) bNext.addEventListener("click", () => go(1));
   card.addEventListener("click", () => { flipped = !flipped; show(); });
-  if (modeSel) modeSel.addEventListener("change", () => { deck = buildDeck(); idx = 0; flipped = false; show(); });
+  function syncFilters() {
+    const isReading = modeSel && modeSel.value === "reading";
+    if (srcSel) srcSel.style.display = isReading ? "inline-block" : "none";
+    if (catSel) catSel.style.display = isReading ? "inline-block" : "none";
+  }
+  if (modeSel) modeSel.addEventListener("change", () => { syncFilters(); deck = buildDeck(); idx = 0; flipped = false; show(); });
+  if (srcSel) srcSel.addEventListener("change", () => { deck = buildDeck(); idx = 0; flipped = false; show(); });
+  if (catSel) catSel.addEventListener("change", () => { deck = buildDeck(); idx = 0; flipped = false; show(); });
+  syncFilters();
   show();
 }
 
