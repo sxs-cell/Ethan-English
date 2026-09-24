@@ -3,7 +3,7 @@
  *  作用：预缓存核心资源，让网站可"添加到主屏幕"、断网也能打开
  * ============================================================ */
 
-const CACHE_NAME = "ethan-english-v7";
+const CACHE_NAME = "ethan-english-v9";
 
 // 核心资源：预缓存，保证离线可访问
 const CORE_ASSETS = [

@@ -7,18 +7,23 @@ if ("serviceWorker" in navigator) {
 
 /* ============ 通用脚本 ============ */
 document.addEventListener("DOMContentLoaded", function () {
-  initNav();
-  initFanwen();   // 先渲染动态内容（范文库手风琴）
-  initZhentiFanwen(); // 渲染大作文真题范文解析
-  initXiaoZuoFanwen(); // 渲染小作文真题范文
-  initAccordion(); // 再绑定所有手风琴事件（含动态渲染的）
-  initVocab();
-  initJuxing();   // 功能句库
-  initFlash();    // 背诵闪卡
-  initTimer();    // 考场计时器
-  initPractice();
-  initAiGrade(); // AI 批改
-  initZhenti();
+  // 每个模块独立执行：任一模块出错不影响其它模块（避免某个模块异常导致词汇库等整页空白）
+  const safe = (name, fn) => {
+    try { if (typeof fn === "function") fn(); }
+    catch (e) { console.error("[Ethan] 模块初始化失败：" + name, e); }
+  };
+  safe("initNav", initNav);
+  safe("initFanwen", initFanwen);         // 先渲染动态内容（范文库手风琴）
+  safe("initZhentiFanwen", initZhentiFanwen); // 渲染大作文真题范文解析
+  safe("initXiaoZuoFanwen", initXiaoZuoFanwen); // 渲染小作文真题范文
+  safe("initAccordion", initAccordion);   // 再绑定所有手风琴事件（含动态渲染的）
+  safe("initVocab", initVocab);
+  safe("initJuxing", initJuxing);         // 功能句库
+  safe("initFlash", initFlash);           // 背诵闪卡
+  safe("initTimer", initTimer);           // 考场计时器
+  safe("initPractice", initPractice);
+  safe("initAiGrade", initAiGrade);       // AI 批改
+  safe("initZhenti", initZhenti);
 });
 
 /* ---- 导航栏汉堡菜单 ---- */
@@ -59,6 +64,8 @@ function initVocab() {
   const ALL_VOCAB = [...VOCAB, ...(typeof VOCAB_EXTRA !== "undefined" ? VOCAB_EXTRA : []), ...(typeof VOCAB_READING !== "undefined" ? VOCAB_READING : [])];
   const cats = ["全部", ...Array.from(new Set(ALL_VOCAB.map((v) => v.cat)))];
   let activeCat = "全部";
+  const sub = document.getElementById("vocab-sub");
+  if (sub) sub.textContent = `共 ${ALL_VOCAB.length} 词条：作文主题词 + 高分替换词 + 阅读生词（含熟词僻义）。点击 ☆ 收藏到生词本，自动保存在本地浏览器。`;
 
   // 渲染筛选标签
   cats.forEach((cat) => {
@@ -77,6 +84,11 @@ function initVocab() {
   if (search) search.addEventListener("input", render);
 
   function render() {
+    if (!ALL_VOCAB.length) {
+      list.innerHTML = '<div class="tip">⚠️ 词库数据未加载成功。请强制刷新（Ctrl/Cmd + Shift + R）后重试；若仍为空，说明页面缺少 data.js / vocab-extra.js / vocab-reading.js。</div>';
+      if (count) count.textContent = 0;
+      return;
+    }
     const kw = (search.value || "").trim().toLowerCase();
     const items = ALL_VOCAB.filter((v) => {
       const matchCat = activeCat === "全部" || v.cat === activeCat;
